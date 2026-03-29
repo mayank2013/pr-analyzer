@@ -31,10 +31,11 @@ export async function POST(req: NextRequest) {
     );
   }
   const { prNumber, repo, baseUrl } = parsed;
-  const authHeader = token ? { Authorization: `token ${token}` } : {};
+  const headers: Record<string, string> = {};
+  if (token) headers['Authorization'] = `token ${token}`;
   try {
     const prRes = await fetch(`${baseUrl}/repos/${repo}/pulls/${prNumber}`, {
-      headers: { ...authHeader },
+      headers,
       cache: 'no-store',
     });
     if (!prRes.ok) {
@@ -42,10 +43,7 @@ export async function POST(req: NextRequest) {
     }
     const prData = await prRes.json();
     const diffRes = await fetch(`${baseUrl}/repos/${repo}/pulls/${prNumber}`, {
-      headers: {
-        ...authHeader,
-        Accept: 'application/vnd.github.v3.diff',
-      },
+      headers: { ...headers, Accept: 'application/vnd.github.v3.diff' },
       cache: 'no-store',
     });
     if (!diffRes.ok) {
