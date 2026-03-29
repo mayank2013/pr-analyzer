@@ -28,8 +28,6 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
     "@svgr/webpack": "^8.1.0",
     "@types/node": "^20.8.9",
     "@types/react": "^18.2.33",
