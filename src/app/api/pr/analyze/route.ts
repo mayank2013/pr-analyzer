@@ -62,7 +62,7 @@ async function getAISuggestions(diff: string): Promise<AIResult> {
     // primary parse failed, try heuristic fallback
   }
 
-  const match = text.match(/\[.*\]/s);
+  const match = text.match(/\[[\s\S]*\]/);
   if (match) {
     try {
       return { suggestions: JSON.parse(match[0]) };
